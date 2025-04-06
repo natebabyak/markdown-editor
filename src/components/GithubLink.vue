@@ -10,11 +10,12 @@ import IconGithub from './icons/IconGithub.vue'
 
 <style lang="css" scoped>
 .github-link {
-  color: var(--color-clickable);
+  color: var(--color-button);
+  transition: color 0.3s ease;
 }
 
 .github-link:hover {
-  color: var(--color-clickable-hover);
+  color: var(--color-button-hover);
 }
 
 .github-link-icon {

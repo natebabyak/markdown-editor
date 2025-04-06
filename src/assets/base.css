@@ -29,21 +29,21 @@
 
 :root {
   --color-background: var(--page-background);
-  --color-background-soft: var(--septenary-contrast);
+  --color-background-soft: var(--octonary-contrast);
+  --color-background-mute: var(--septenary-contrast);
 
-  --color-border: var(--senary-contrast);
+  --color-border: var(--septenary-contrast);
   --color-border-hover: var(--quaternary-contrast);
 
-  --color-clickable: var(--quaternary-contrast);
-  --color-clickable-hover: var(--secondary-contrast);
+  --color-button: var(--quaternary-contrast);
+  --color-button-hover: var(--primary-contrast);
 
-  --color-clickable-background: var(--octonary-contrast);
-  --color-clickable-background-hover: var(--senary-contrast);
+  --color-button-background: var(--octonary-contrast);
+  --color-button-background-hover: var(--senary-contrast);
 
-  --color-heading: var(--full-contrast);
-
-  --color-text: var(--primary-contrast);
-  --color-text-soft: var(--tertiary-contrast);
+  --color-text: var(--full-contrast);
+  --color-text-soft: var(--secondary-contrast);
+  --color-text-mute: var(--quaternary-contrast);
 }
 
 *,
@@ -58,5 +58,4 @@ body {
   background-color: var(--color-background);
   color: var(--color-text);
   font-family: Roboto, sans-serif;
-  transition: all 0.3s ease;
 }

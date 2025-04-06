@@ -8,7 +8,7 @@ import TheSidebar from './components/TheSidebar.vue'
 
 <template>
   <TheHeader />
-  <main>
+  <main class="main">
     <TheSidebar />
     <TheEditor />
     <ThePreview />
@@ -16,4 +16,10 @@ import TheSidebar from './components/TheSidebar.vue'
   <TheFooter />
 </template>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.main {
+  display: flex;
+  height: calc(100vh);
+  padding-top: 4rem;
+}
+</style>

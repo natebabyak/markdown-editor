@@ -12,11 +12,13 @@ const year = new Date().getFullYear()
 .footer {
   border-top: 1px solid var(--color-border);
   bottom: 0;
+  display: flex;
+  justify-content: space-around;
   padding: 4rem;
   width: 100%;
 }
 
 .footer-text {
-  color: var(--color-text-soft);
+  color: var(--color-text-mute);
 }
 </style>
