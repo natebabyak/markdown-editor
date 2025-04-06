@@ -1,11 +1,15 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import GithubLink from './GithubLink.vue'
+</script>
 
 <template>
   <header class="header">
-    <div class="header-right">
-      <a href=""></a>
-    </div>
+    <GithubLink />
   </header>
 </template>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.header {
+  border-bottom: 1px solid var(--color-border);
+}
+</style>

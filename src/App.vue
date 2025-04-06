@@ -8,8 +8,8 @@ import TheSidebar from './components/TheSidebar.vue'
 
 <template>
   <TheHeader />
-  <TheSidebar />
   <main>
+    <TheSidebar />
     <TheEditor />
     <ThePreview />
   </main>
