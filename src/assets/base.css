@@ -1,0 +1,62 @@
+:root {
+  --gray-1000: oklch(16.93% 0.004 285.95);
+  --gray-900: oklch(19.37% 0.006 300.98);
+  --gray-800: oklch(25.16% 0.008 308.11);
+  --gray-700: oklch(36.98% 0.014 302.71);
+  --gray-600: oklch(44% 0.019 306.08);
+  --gray-500: oklch(54.84% 0.023 304.99);
+  --gray-400: oklch(70.9% 0.015 304.04);
+  --gray-300: oklch(84.01% 0.009 308.34);
+  --gray-200: oklch(91.75% 0.004 301.42);
+  --gray-100: oklch(97.12% 0.002 325.59);
+  --gray-50: oklch(98.81% 0 0);
+}
+
+:root {
+  color-scheme: light dark;
+
+  --full-contrast: light-dark(black, white);
+  --primary-contrast: light-dark(var(--gray-900), var(--gray-50));
+  --secondary-contrast: light-dark(var(--gray-800), var(--gray-300));
+  --tertiary-contrast: light-dark(var(--gray-700), var(--gray-300));
+  --quaternary-contrast: light-dark(var(--gray-500), var(--gray-400));
+  --quinary-contrast: light-dark(var(--gray-300), var(--gray-500));
+  --senary-contrast: light-dark(var(--gray-200), var(--gray-700));
+  --septenary-contrast: light-dark(var(--gray-100), var(--gray-800));
+  --octonary-contrast: light-dark(var(--gray-50), var(--gray-900));
+  --page-background: light-dark(white, var(--gray-1000));
+}
+
+:root {
+  --color-background: var(--page-background);
+  --color-background-soft: var(--septenary-contrast);
+
+  --color-border: var(--senary-contrast);
+  --color-border-hover: var(--quaternary-contrast);
+
+  --color-clickable: var(--quaternary-contrast);
+  --color-clickable-hover: var(--secondary-contrast);
+
+  --color-clickable-background: var(--octonary-contrast);
+  --color-clickable-background-hover: var(--senary-contrast);
+
+  --color-heading: var(--full-contrast);
+
+  --color-text: var(--primary-contrast);
+  --color-text-soft: var(--tertiary-contrast);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text);
+  font-family: Roboto, sans-serif;
+  transition: all 0.3s ease;
+}

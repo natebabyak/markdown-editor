@@ -1,0 +1,19 @@
+<script setup lang="ts">
+import TheEditor from './components/TheEditor.vue'
+import TheFooter from './components/TheFooter.vue'
+import TheHeader from './components/TheHeader.vue'
+import ThePreview from './components/ThePreview.vue'
+import TheSidebar from './components/TheSidebar.vue'
+</script>
+
+<template>
+  <TheHeader />
+  <TheSidebar />
+  <main>
+    <TheEditor />
+    <ThePreview />
+  </main>
+  <TheFooter />
+</template>
+
+<style lang="css" scoped></style>
