@@ -2,7 +2,7 @@
 
 <template>
   <div class="editor-container">
-    <textarea class="editor"></textarea>
+    <textarea class="editor" autocorrect="on" autofocus cols="80" disabled></textarea>
   </div>
 </template>
 

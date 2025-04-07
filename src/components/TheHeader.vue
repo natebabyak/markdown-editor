@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import GithubLink from './GithubLink.vue'
-import SidebarButton from './SidebarButton.vue'
 import ThemeMenuButton from './ThemeMenuButton.vue'
 </script>
 
 <template>
   <header class="header">
-    <SidebarButton />
     <ThemeMenuButton />
     <GithubLink />
   </header>
@@ -19,7 +17,7 @@ import ThemeMenuButton from './ThemeMenuButton.vue'
   display: flex;
   gap: 2rem;
   justify-content: right;
-  padding: 1rem 2rem;
+  padding: 1rem 2rem 1rem 2rem;
   position: fixed;
   width: 100%;
 }

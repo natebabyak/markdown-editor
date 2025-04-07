@@ -4,7 +4,7 @@ import ThemeMenuItem from './ThemeMenuItem.vue'
 
 const themeStore = useThemeStore()
 
-const themes = Object.values(themeStore.THEMES)
+const themes = Object.values(themeStore.themes)
 </script>
 
 <template>

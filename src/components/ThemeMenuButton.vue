@@ -16,7 +16,7 @@ onClickOutside(target, () => (themeMenuOpen.value = false))
 <template>
   <div class="theme-menu-button-container">
     <div class="theme-menu-button" ref="target" @click="toggleThemeMenu">
-      <component class="theme-menu-button-icon" :is="themeStore.getIcon()" />
+      <component class="theme-menu-button-icon" :is="themeStore.get()" />
     </div>
     <ThemeMenu v-if="themeMenuOpen" />
   </div>
@@ -28,13 +28,13 @@ onClickOutside(target, () => (themeMenuOpen.value = false))
 }
 
 .theme-menu-button {
-  color: var(--color-button);
+  color: var(--quaternary-contrast);
   cursor: pointer;
   transition: color 0.3s ease;
 }
 
 .theme-menu-button:hover {
-  color: var(--color-button-hover);
+  color: var(--full-contrast);
 }
 
 .theme-menu-button-icon {

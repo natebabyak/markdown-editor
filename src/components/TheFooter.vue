@@ -10,15 +10,13 @@ const year = new Date().getFullYear()
 
 <style lang="css" scoped>
 .footer {
-  border-top: 1px solid var(--color-border);
-  bottom: 0;
-  display: flex;
-  justify-content: space-around;
+  border-top: 1px solid var(--senary-contrast);
   padding: 4rem;
+  text-align: center;
   width: 100%;
 }
 
 .footer-text {
-  color: var(--color-text-mute);
+  color: var(--quaternary-contrast);
 }
 </style>

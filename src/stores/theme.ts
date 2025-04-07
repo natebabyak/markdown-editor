@@ -6,14 +6,10 @@ import IconSystemTheme from '@/components/icons/IconSystemTheme.vue'
 
 export const useThemeStore = defineStore('theme', () => {
   /** The themes of the app. */
-  const THEMES = {
-    DARK: 'dark',
-    LIGHT: 'light',
-    SYSTEM: 'system',
-  } as const
+  const themes = ['dark', 'light', 'system']
 
   /** A theme of an app. */
-  type Theme = (typeof THEMES)[keyof typeof THEMES]
+  type Theme = (typeof themes)[number]
 
   /** The theme of the app. */
   const theme = ref<Theme>((localStorage.getItem('theme') ?? 'system') as Theme)
@@ -23,11 +19,11 @@ export const useThemeStore = defineStore('theme', () => {
    * @param iconTheme The theme to get the icon of.
    * @returns The icon of the theme.
    */
-  function getIcon(iconTheme: Theme = theme.value) {
+  function get(iconTheme: Theme = theme.value) {
     switch (iconTheme) {
-      case THEMES.DARK:
+      case 'dark':
         return IconDarkTheme
-      case THEMES.LIGHT:
+      case 'light':
         return IconLightTheme
       default:
         return IconSystemTheme
@@ -50,5 +46,5 @@ export const useThemeStore = defineStore('theme', () => {
 
   set()
 
-  return { THEMES, getIcon, set }
+  return { themes, get, set }
 })

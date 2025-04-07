@@ -1,3 +1,4 @@
+/* color palette from <https://angular.dev/> */
 :root {
   --gray-1000: oklch(16.93% 0.004 285.95);
   --gray-900: oklch(19.37% 0.006 300.98);
@@ -12,6 +13,7 @@
   --gray-50: oklch(98.81% 0 0);
 }
 
+/* semantic color variables for this project */
 :root {
   color-scheme: light dark;
 
@@ -27,35 +29,32 @@
   --page-background: light-dark(white, var(--gray-1000));
 }
 
+/* semantic font variables for this project */
 :root {
-  --color-background: var(--page-background);
-  --color-background-soft: var(--octonary-contrast);
-  --color-background-mute: var(--septenary-contrast);
-
-  --color-border: var(--septenary-contrast);
-  --color-border-hover: var(--quaternary-contrast);
-
-  --color-button: var(--quaternary-contrast);
-  --color-button-hover: var(--primary-contrast);
-
-  --color-button-background: var(--octonary-contrast);
-  --color-button-background-hover: var(--senary-contrast);
-
-  --color-text: var(--full-contrast);
-  --color-text-soft: var(--secondary-contrast);
-  --color-text-mute: var(--quaternary-contrast);
+  --code-font: 'DM Mono', monospace;
+  --inter-font: 'Inter', var(--fallback-font-stack);
+  --inter-tight-font: 'Inter Tight', var(--fallback-font-stack);
+  --fallback-font-stack:
+    ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, 'Noto Sans', sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
 }
 
 *,
 *::before,
 *::after {
   box-sizing: border-box;
+  font-weight: normal;
   margin: 0;
   padding: 0;
 }
 
 body {
-  background-color: var(--color-background);
-  color: var(--color-text);
-  font-family: Roboto, sans-serif;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: var(--page-background);
+  color: var(--primary-contrast);
+  font-family: var(--inter-font);
+  font-size: 16px;
+  scroll-behavior: smooth;
 }
