@@ -4,7 +4,7 @@ import IconGithub from './icons/IconGithub.vue'
 </script>
 
 <template>
-  <BaseTooltip :location="'south'" :text="'GitHub'">
+  <BaseTooltip :location="'north'" :text="'GitHub'">
     <a class="github-link" href="https://github.com/natebabyak/markdown-editor">
       <IconGithub class="github-link-icon" />
     </a>

@@ -25,9 +25,9 @@ const hide = () => {
 <template>
   <div class="tooltip-wrapper" @mouseenter="show" @mouseleave="hide">
     <slot></slot>
-    <div class="tooltip" v-show="visible" :class="location" @mouseenter="hide">
+    <div class="tooltip" v-if="visible" :class="location" @mouseenter="hide">
       <span class="tooltip-text"> {{ text }} </span>
-      <span class="tooltip-arrow" :class="location"></span>
+      <span class="tooltip-arrow" :class="location"> </span>
     </div>
   </div>
 </template>
@@ -41,49 +41,70 @@ const hide = () => {
   background-color: var(--page-background);
   border: 1px solid var(--senary-contrast);
   border-radius: 9999px;
+  left: 50%;
   padding: 0.25rem 0.5rem 0.25rem 0.5rem;
   position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
   z-index: 1002;
 }
 
 .tooltip.north {
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -0.5rem);
 }
 
 .tooltip.south {
-  left: -50%;
-  top: calc(100% + 0.75rem);
+  left: 50%;
+  top: 100%;
+  transform: translate(-50%, 0.5rem);
 }
 
 .tooltip.east {
+  left: 100%;
+  top: 50%;
+  transform: translate(0.5rem, -50%);
 }
 
 .tooltip.west {
+  right: 100%;
+  top: 50%;
+  transform: translate(-0.5rem, -50%);
 }
 
 .tooltip-arrow {
-  -webkit-transform: rotate(45deg);
   background-color: var(--page-background);
-  border: 1px solid var(--senary-contrast);
-  height: 0.7071rem;
+  border-right: 1px solid var(--senary-contrast);
+  border-top: 1px solid var(--senary-contrast);
+  height: 0.5rem;
+  left: 50%;
   position: absolute;
-  transform: rotate(45deg);
-  width: 0.7071rem;
+  top: 50%;
+  width: 0.5rem;
   z-index: 1003;
 }
 
 .tooltip-arrow.north {
+  transform: translate(-50%, -50%) rotate(135deg);
+  bottom: -0.25rem;
+  left: 50%;
 }
 
 .tooltip-arrow.south {
-  border-bottom: none;
-  border-right: none;
-  left: calc(50% - 0.44em);
-  top: -0.4rem;
+  left: 50%;
+  top: -0.05rem;
+  transform: translate(-50%, -50%) rotate(-45deg);
 }
 
 .tooltip-arrow.east {
+  left: 0;
+  top: 50%;
+  transform: translate(-50%, -50%) rotate(-135deg);
 }
 
 .tooltip-arrow.west {
+  top: 50%;
+  right: -0.25rem;
 }
 </style>
