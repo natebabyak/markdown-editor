@@ -1,7 +1,7 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div class="outline"></div>
+  <header class="header"></header>
 </template>
 
 <style lang="css" scoped></style>

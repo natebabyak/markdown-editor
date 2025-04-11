@@ -8,7 +8,7 @@ defineProps<{
   text: string
 }>()
 
-const visible = ref<Boolean>(false)
+const visible = ref<boolean>(false)
 
 let timeout: ReturnType<typeof setTimeout> | null = null
 

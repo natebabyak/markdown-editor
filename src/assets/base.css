@@ -53,7 +53,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   background-color: var(--page-background);
-  color: var(--primary-contrast);
+  color: var(--full-contrast);
   font-family: var(--inter-font);
   font-size: 16px;
   scroll-behavior: smooth;
