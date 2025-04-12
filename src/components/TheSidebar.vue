@@ -1,48 +1,34 @@
 <script setup lang="ts">
-import IconLeftPanelClose from './icons/IconLeftPanelClose.vue'
-import IconLeftPanelOpen from './icons/IconLeftPanelOpen.vue'
+import IconLeftPanelClose from './icons/IconCloseSidebar.vue'
+import IconLeftPanelOpen from './icons/IconOpenSidebar.vue'
 import { useSidebarStore } from '@/stores/sidebar'
 
-const sidebarStore = useSidebarStore()
+const sidebar = useSidebarStore()
 </script>
 
 <template>
-  <aside class="sidebar" :class="[sidebarStore.isOpen ? 'open' : 'closed']">
-    <div class="button" @click="sidebarStore.toggle">
-      <IconLeftPanelClose class="icon" v-if="sidebarStore.isOpen" />
-      <IconLeftPanelOpen class="icon" v-else />
+  <aside class="sidebar" :class="[sidebar.isOpen ? 'open' : 'closed']">
+    <div class="icon-button" @click="sidebar.toggle">
+      <IconLeftPanelClose v-if="sidebar.isOpen" />
+      <IconLeftPanelOpen v-else />
     </div>
   </aside>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 .sidebar {
+  background-color: var(--octonary-contrast);
   border-right: 1px solid var(--senary-contrast);
+  height: 100%;
   padding: 1rem;
-  position: absolute;
-  transition: transform 0.3s ease;
+  transition: width 0.5s ease;
 }
 
 .sidebar.open {
-  transform: translateX(20%);
+  width: 20vw;
 }
 
 .sidebar.closed {
-  transform: translateX(0);
-}
-
-.button {
-  color: var(--quaternary-contrast);
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.button:hover {
-  color: var(--full-contrast);
-}
-
-.icon {
-  height: 2rem;
-  width: 2rem;
+  width: 4rem;
 }
 </style>

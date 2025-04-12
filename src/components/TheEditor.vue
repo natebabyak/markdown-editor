@@ -1,15 +1,25 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { useTextStore } from '@/stores/text'
+import { ref } from 'vue'
+
+const textStore = useTextStore()
+
+const text = textStore.text.split('\n')
+
+const lines = ref(1)
+
+const selectedLine = ref(null)
+</script>
 
 <template>
   <div class="editor">
-    <textarea class="text-area" autocorrect="on"></textarea>
+    <div v-for="(line, index) in lines">
+      <span>{{ index + 1 }}</span>
+      <div contenteditable="true">
+        {{ text[line] }}
+      </div>
+    </div>
   </div>
 </template>
 
-<style lang="css" scoped>
-.text-area {
-  font-family: var(--code-font);
-  font-size: 1rem;
-  resize: none;
-}
-</style>
+<style lang="css"></style>

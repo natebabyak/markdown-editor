@@ -2,46 +2,59 @@
 import { onMounted } from 'vue'
 import TheEditor from './components/TheEditor.vue'
 import TheHeader from './components/TheHeader.vue'
-import TheOutline from './components/TheSidebar.vue'
 import ThePreview from './components/ThePreview.vue'
 import Split from 'split.js'
+import TheSidebar from './components/TheSidebar.vue'
+import TheMenu from './components/TheMenu.vue'
 
 onMounted(() => {
-  Split(['#editor', '#preview'], {
-    sizes: [50, 50],
+  Split(['#split-0', '#split-1'], {
     snapOffset: 0,
-    cursor: 'grab',
+    cursor: 'ew-resize',
+    gutterSize: 4,
   })
 })
 </script>
 
 <template>
   <TheHeader />
-  <main class="main">
-    <TheOutline open="true" />
-    <div class="split">
-      <div id="editor">
-        <TheEditor />
+  <div class="layout">
+    <TheSidebar />
+    <main class="main">
+      <div class="split">
+        <div id="split-0">
+          <TheEditor />
+        </div>
+        <div id="split-1">
+          <ThePreview />
+        </div>
       </div>
-      <div id="preview">
-        <ThePreview />
-      </div>
-    </div>
-  </main>
+    </main>
+  </div>
+  <TheMenu />
 </template>
 
 <style lang="css">
-.main {
+.layout {
   display: flex;
   height: calc(100vh - 4rem);
+  width: 100vw;
+  overflow: hidden;
+}
+
+.main {
+  display: flex;
+  flex: 1;
 }
 
 .split {
   display: flex;
+  flex: 1;
 }
 
 .gutter {
   background-color: var(--senary-contrast);
+  background-position: 50%;
 }
 
 .gutter:hover {

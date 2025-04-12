@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useMenuStore = defineStore('menu', () => {
   /** Whether the menu is open. */
-  const menuOpen = ref(true)
+  const menuOpen = ref(false)
 
   /** Gets whether the menu is open. */
   const isOpen = computed(() => menuOpen.value)

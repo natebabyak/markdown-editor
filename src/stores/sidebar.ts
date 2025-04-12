@@ -3,7 +3,7 @@ import { defineStore } from 'pinia'
 
 export const useSidebarStore = defineStore('sidebar', () => {
   /** Whether the sidebar is open. */
-  const sidebarOpen = ref(true)
+  const sidebarOpen = ref(false)
 
   /** Gets whether the sidebar is open. */
   const isOpen = computed(() => sidebarOpen.value)

@@ -4,4 +4,4 @@
   <div></div>
 </template>
 
-<style lang="css" scoped></style>
+<style lang="css"></style>

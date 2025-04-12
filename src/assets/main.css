@@ -1,1 +1,60 @@
 @import './base.css';
+@import '../../node_modules/github-markdown-css/github-markdown.css';
+
+hr {
+  border-color: var(--senary-contrast);
+}
+
+.icon-button {
+  color: var(--quaternary-contrast);
+  cursor: pointer;
+  height: 2rem;
+  transition: color 0.3s ease;
+  width: 2rem;
+}
+
+.icon-button:hover {
+  color: var(--full-contrast);
+}
+
+.icon-button svg {
+  height: 2rem;
+  width: 2rem;
+}
+
+.icon-and-text-button {
+  align-items: center;
+  border-radius: 9999px;
+  color: var(--tertiary-contrast);
+  cursor: pointer;
+  display: flex;
+  gap: 0.5rem;
+  height: 2.5rem;
+  justify-content: left;
+  padding: 0 0.5rem 0 0.5rem;
+  text-decoration: none;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  width: 100%;
+}
+
+.icon-and-text-button:hover {
+  background-color: var(--septenary-contrast);
+  color: var(--full-contrast);
+}
+
+.icon-and-text-button.active {
+  background-color: var(--full-contrast);
+  color: var(--septenary-contrast);
+  cursor: default;
+}
+
+.icon-and-text-button svg {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.icon-and-text-button span {
+  font-weight: 500;
+}

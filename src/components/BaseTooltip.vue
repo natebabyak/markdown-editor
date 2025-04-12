@@ -32,7 +32,7 @@ const hide = () => {
   </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 .tooltip-wrapper {
   position: relative;
 }
