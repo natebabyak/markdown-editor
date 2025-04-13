@@ -15,12 +15,19 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@codemirror/lang-markdown": "github:codemirror/lang-markdown",
+    "@codemirror/language-data": "github:codemirror/language-data",
+    "@codemirror/theme-one-dark": "^6.1.2",
+    "@ddietr/codemirror-themes": "^1.5.1",
     "@vueuse/core": "^13.0.0",
+    "codemirror": "^6.0.1",
     "dompurify": "^3.2.5",
     "github-markdown-css": "^5.8.1",
     "markdown-it": "^14.1.0",
     "pinia": "^3.0.1",
     "split.js": "^1.6.5",
+    "thememirror": "^2.0.1",
+    "v-tooltip": "^2.1.3",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0"
   },

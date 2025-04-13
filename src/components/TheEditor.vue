@@ -1,25 +1,72 @@
 <script setup lang="ts">
 import { useTextStore } from '@/stores/text'
-import { ref } from 'vue'
+import { markdown } from '@codemirror/lang-markdown'
+import { languages } from '@codemirror/language-data'
+import { Compartment, EditorState } from '@codemirror/state'
+import { basicSetup, EditorView } from 'codemirror'
+import { onMounted, ref, watch } from 'vue'
+import EditorHeader from './EditorHeader.vue'
+import { useThemeStore } from '@/stores/theme'
 
-const textStore = useTextStore()
+const editor = ref()
+const editorTheme = new Compartment()
+const text = useTextStore().text
+const themeStore = useThemeStore()
 
-const text = textStore.text.split('\n')
+let view = new EditorView()
 
-const lines = ref(1)
+onMounted(() => {
+  view = new EditorView({
+    state: EditorState.create({
+      extensions: [
+        basicSetup,
+        EditorView.lineWrapping,
+        markdown({ codeLanguages: languages }),
+        editorTheme.of([
+          themeStore.editor,
+          EditorView.theme({
+            '.cm-content': {
+              paddingBottom: 'calc(100vh - 8.4rem)',
+            },
+          }),
+        ]),
+      ],
+      doc: text,
+    }),
+    parent: editor.value,
+  })
+})
 
-const selectedLine = ref(null)
+watch(themeStore, () => {
+  view.dispatch({
+    effects: editorTheme.reconfigure([
+      themeStore.editor,
+      EditorView.theme({
+        '.cm-content': {
+          paddingBottom: 'calc(100vh - 8.4rem)',
+        },
+      }),
+    ]),
+  })
+})
 </script>
 
 <template>
-  <div class="editor">
-    <div v-for="(line, index) in lines">
-      <span>{{ index + 1 }}</span>
-      <div contenteditable="true">
-        {{ text[line] }}
-      </div>
+  <div class="editor-container">
+    <EditorHeader />
+    <div class="editor-wrapper">
+      <div ref="editor"></div>
     </div>
   </div>
 </template>
 
-<style lang="css"></style>
+<style lang="css">
+.editor-container {
+  height: calc(100vh - 4rem);
+}
+
+.editor-wrapper {
+  height: calc(100vh - 7rem);
+  overflow-y: scroll;
+}
+</style>

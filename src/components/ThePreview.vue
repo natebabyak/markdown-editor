@@ -6,20 +6,28 @@ import { computed } from 'vue'
 
 const textStore = useTextStore()
 
-const md = markdownit()
+const md = markdownit({
+  html: true,
+  linkify: true,
+  typographer: true,
+})
 
-const renderedHtml = computed(() => DOMPurify.sanitize(md.render(textStore.text)))
+const html = computed(() => DOMPurify.sanitize(md.render(textStore.text)))
 </script>
 
 <template>
-  <div class="preview">
-    <div v-html="renderedHtml" class="markdown-body"></div>
+  <div class="preview-container">
+    <div v-html="html" class="preview markdown-body"></div>
   </div>
 </template>
 
 <style lang="css" scoped>
-.preview {
+.preview-container {
   height: 100%;
-  width: 100%;
+  overflow-y: scroll;
+}
+
+.preview {
+  padding: 5%;
 }
 </style>

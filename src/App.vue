@@ -8,7 +8,8 @@ import TheSidebar from './components/TheSidebar.vue'
 import TheMenu from './components/TheMenu.vue'
 
 onMounted(() => {
-  Split(['#split-0', '#split-1'], {
+  Split(['#editor', '#preview'], {
+    minSize: 0,
     snapOffset: 0,
     cursor: 'ew-resize',
     gutterSize: 4,
@@ -22,10 +23,10 @@ onMounted(() => {
     <TheSidebar />
     <main class="main">
       <div class="split">
-        <div id="split-0">
+        <div id="editor">
           <TheEditor />
         </div>
-        <div id="split-1">
+        <div id="preview">
           <ThePreview />
         </div>
       </div>
@@ -54,7 +55,6 @@ onMounted(() => {
 
 .gutter {
   background-color: var(--senary-contrast);
-  background-position: 50%;
 }
 
 .gutter:hover {

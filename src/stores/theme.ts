@@ -1,8 +1,10 @@
+import { computed, ref } from 'vue'
 import { defineStore } from 'pinia'
+import { githubDark } from '@ddietr/codemirror-themes/theme/github-dark'
+import { githubLight } from '@ddietr/codemirror-themes/theme/github-light'
 import IconDarkTheme from '@/components/icons/IconDarkTheme.vue'
 import IconLightTheme from '@/components/icons/IconLightTheme.vue'
 import IconSystemTheme from '@/components/icons/IconSystemTheme.vue'
-import { ref } from 'vue'
 
 export const useThemeStore = defineStore('theme', () => {
   /** The themes of the app. */
@@ -13,6 +15,19 @@ export const useThemeStore = defineStore('theme', () => {
 
   /** The theme of the app. */
   const theme = ref<Theme>((localStorage.getItem('theme') ?? 'system') as Theme)
+
+  /** Gets the theme of the app. */
+  const app = computed(() => theme.value)
+
+  /** Gets whether the theme is dark. */
+  const isDark = computed(
+    () =>
+      theme.value === 'dark' ||
+      (theme.value === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches),
+  )
+
+  /** Gets the theme of the editor */
+  const editor = computed(() => (isDark.value ? githubDark : githubLight))
 
   /**
    * Gets the icon of a theme.
@@ -56,11 +71,24 @@ export const useThemeStore = defineStore('theme', () => {
     } else {
       document.body.style.colorScheme = themeSet
     }
+
     localStorage.setItem('theme', themeSet)
     theme.value = themeSet
+
+    const existingLink = document.getElementById('github-markdown-css')
+    if (existingLink) {
+      existingLink.remove()
+    }
+    const link = document.createElement('link')
+    link.id = 'github-markdown-css'
+    link.rel = 'stylesheet'
+    link.href = isDark.value
+      ? 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-dark.css'
+      : 'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/5.8.1/github-markdown-light.css'
+    document.head.appendChild(link)
   }
 
   set(theme.value)
 
-  return { themes, theme, icon, name, set }
+  return { themes, app, editor, icon, name, set }
 })

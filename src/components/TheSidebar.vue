@@ -1,17 +1,19 @@
 <script setup lang="ts">
+import BaseIconButton from './BaseIconButton.vue'
 import IconLeftPanelClose from './icons/IconCloseSidebar.vue'
 import IconLeftPanelOpen from './icons/IconOpenSidebar.vue'
 import { useSidebarStore } from '@/stores/sidebar'
 
-const sidebar = useSidebarStore()
+const sidebarStore = useSidebarStore()
 </script>
 
 <template>
-  <aside class="sidebar" :class="[sidebar.isOpen ? 'open' : 'closed']">
-    <div class="icon-button" @click="sidebar.toggle">
-      <IconLeftPanelClose v-if="sidebar.isOpen" />
-      <IconLeftPanelOpen v-else />
-    </div>
+  <aside class="sidebar" :class="[sidebarStore.isOpen ? 'open' : 'closed']">
+    <BaseIconButton
+      @click="sidebarStore.toggle"
+      :icon="sidebarStore.isOpen ? IconLeftPanelClose : IconLeftPanelOpen"
+      :size="'large'"
+    />
   </aside>
 </template>
 

@@ -7,6 +7,9 @@ import { onClickOutside } from '@vueuse/core'
 import { useMenuStore } from '@/stores/menu'
 import { useTemplateRef } from 'vue'
 import { useThemeStore } from '@/stores/theme'
+import MenuLink from './MenuLink.vue'
+import MenuButton from './MenuButton.vue'
+import BaseIconButton from './BaseIconButton.vue'
 
 const menuStore = useMenuStore()
 const target = useTemplateRef<HTMLElement>('target')
@@ -18,42 +21,35 @@ onClickOutside(target, () => menuStore.close())
 <template>
   <div :class="[menuStore.isOpen ? 'open' : 'closed']" class="menu" ref="target">
     <div class="button-container">
-      <div @click="menuStore.close" class="icon-button">
-        <IconClose />
-      </div>
+      <BaseIconButton @click="menuStore.close" :icon="IconClose" />
     </div>
     <h2>Tools</h2>
     <hr />
-    <div class="icon-and-text-button">
-      <IconSpellcheck />
-      <span>Spellcheck</span>
-    </div>
-    <div class="icon-and-text-button">
-      <IconWordCount />
-      <span>Word Count</span>
-    </div>
-    <h2>Themes</h2>
+    <MenuButton :icon="IconSpellcheck" :text="'Spellcheck'" />
+    <MenuButton :icon="IconWordCount" :text="'Word Count'" />
+    <h2>Theme</h2>
     <hr />
-    <div
+    <MenuButton
       v-for="theme in themeStore.themes"
       :key="theme"
       @click="themeStore.set(theme)"
-      :class="{ active: theme == themeStore.theme }"
-      class="icon-and-text-button"
+      :icon="themeStore.icon(theme)"
+      :is-active="theme === themeStore.app"
+      :is-default="theme === 'system'"
+      :text="themeStore.name(theme)"
     >
-      <component :is="themeStore.icon(theme)" />
-      <span>{{ themeStore.name(theme) }}</span>
-    </div>
+    </MenuButton>
     <h2>Links</h2>
     <hr />
-    <a class="icon-and-text-button" href="https://github.com/natebabyak/markdown-editor">
-      <IconGithub />
-      <span>GitHub</span>
-    </a>
+    <MenuLink
+      :icon="IconGithub"
+      :text="'GitHub'"
+      :url="'https://github.com/natebabyak/markdown-editor'"
+    />
   </div>
 </template>
 
-<style lang="css">
+<style lang="css" scoped>
 .menu {
   background-color: var(--octonary-contrast);
   border-left: 1px solid var(--senary-contrast);
@@ -77,5 +73,9 @@ onClickOutside(target, () => menuStore.close())
 .button-container {
   display: flex;
   justify-content: right;
+}
+
+hr {
+  border-color: var(--senary-contrast);
 }
 </style>
