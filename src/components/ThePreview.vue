@@ -1,10 +1,10 @@
 <script setup lang="ts">
+import { useMarkdownStore } from '@/stores/markdown'
 import DOMPurify from 'dompurify'
 import markdownit from 'markdown-it'
-import { useTextStore } from '@/stores/text'
 import { computed } from 'vue'
 
-const textStore = useTextStore()
+const markdownStore = useMarkdownStore()
 
 const md = markdownit({
   html: true,
@@ -12,22 +12,25 @@ const md = markdownit({
   typographer: true,
 })
 
-const html = computed(() => DOMPurify.sanitize(md.render(textStore.text)))
+const html = computed(() => DOMPurify.sanitize(md.render(markdownStore.markdown)))
 </script>
 
 <template>
-  <div class="preview-container">
+  <div class="container">
     <div v-html="html" class="preview markdown-body"></div>
   </div>
 </template>
 
 <style lang="css" scoped>
-.preview-container {
+.container {
   height: 100%;
   overflow-y: scroll;
 }
 
 .preview {
-  padding: 5%;
+  padding-left: 2rem;
+  padding-right: 2rem;
+  padding-top: 2rem;
+  padding-bottom: calc(100vh - 7rem);
 }
 </style>

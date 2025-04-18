@@ -30,13 +30,13 @@ onClickOutside(target, () => menuStore.close())
     <h2>Theme</h2>
     <hr />
     <MenuButton
-      v-for="theme in themeStore.themes"
-      :key="theme"
-      @click="themeStore.set(theme)"
-      :icon="themeStore.icon(theme)"
-      :is-active="theme === themeStore.app"
-      :is-default="theme === 'system'"
-      :text="themeStore.name(theme)"
+      v-for="(theme, index) in themeStore.themes"
+      :key="index"
+      @click="themeStore.set(theme.key)"
+      :icon="theme.icon"
+      :is-active="theme.key === themeStore.app"
+      :is-default="theme.key === 'system'"
+      :text="theme.name"
     >
     </MenuButton>
     <h2>Links</h2>

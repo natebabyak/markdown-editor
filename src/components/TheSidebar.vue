@@ -3,25 +3,22 @@ import BaseIconButton from './BaseIconButton.vue'
 import IconLeftPanelClose from './icons/IconCloseSidebar.vue'
 import IconLeftPanelOpen from './icons/IconOpenSidebar.vue'
 import { useSidebarStore } from '@/stores/sidebar'
+import TableOfContents from './TableOfContents.vue'
 
-const sidebarStore = useSidebarStore()
+const sb = useSidebarStore()
 </script>
 
 <template>
-  <aside class="sidebar" :class="[sidebarStore.isOpen ? 'open' : 'closed']">
-    <BaseIconButton
-      @click="sidebarStore.toggle"
-      :icon="sidebarStore.isOpen ? IconLeftPanelClose : IconLeftPanelOpen"
-      :size="'large'"
-    />
+  <aside class="sidebar" :class="[sb.isOpen ? 'open' : 'closed']">
+    <BaseIconButton @click="sb.toggle" :icon="sb.isOpen ? IconLeftPanelClose : IconLeftPanelOpen" />
+    <TableOfContents v-if="sb.isOpen" />
   </aside>
 </template>
 
-<style lang="css">
+<style lang="css" scoped>
 .sidebar {
   background-color: var(--octonary-contrast);
   border-right: 1px solid var(--senary-contrast);
-  height: 100%;
   padding: 1rem;
   transition: width 0.5s ease;
 }

@@ -1,17 +1,15 @@
 <script setup lang="ts">
-import { useTextStore } from '@/stores/text'
 import { markdown } from '@codemirror/lang-markdown'
 import { languages } from '@codemirror/language-data'
 import { Compartment, EditorState } from '@codemirror/state'
 import { basicSetup, EditorView } from 'codemirror'
 import { onMounted, ref, watch } from 'vue'
 import EditorHeader from './EditorHeader.vue'
-import { useThemeStore } from '@/stores/theme'
+import { useMarkdownStore } from '@/stores/markdown'
 
 const editor = ref()
+const markdownStore = useMarkdownStore()
 const editorTheme = new Compartment()
-const text = useTextStore().text
-const themeStore = useThemeStore()
 
 let view = new EditorView()
 
@@ -22,6 +20,11 @@ onMounted(() => {
         basicSetup,
         EditorView.lineWrapping,
         markdown({ codeLanguages: languages }),
+        EditorView.updateListener.of((update) => {
+          if (update.docChanged) {
+            markdownStore.markdown = update.state.doc.toString()
+          }
+        }),
         editorTheme.of([
           themeStore.editor,
           EditorView.theme({
@@ -31,7 +34,7 @@ onMounted(() => {
           }),
         ]),
       ],
-      doc: text,
+      doc: markdownStore.markdown,
     }),
     parent: editor.value,
   })
@@ -60,7 +63,7 @@ watch(themeStore, () => {
   </div>
 </template>
 
-<style lang="css">
+<style lang="css" scoped>
 .editor-container {
   height: calc(100vh - 4rem);
 }

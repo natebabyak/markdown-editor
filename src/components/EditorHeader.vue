@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import EditorHeaderButton from './EditorHeaderButton.vue'
+import EditorHeaderStyleSelect from './EditorHeaderStyleSelect.vue'
 import IconBlockquote from './icons/IconBlockquote.vue'
 import IconBold from './icons/IconBold.vue'
 import IconCode from './icons/IconCode.vue'
@@ -12,7 +13,9 @@ import IconUnorderedList from './icons/IconUnorderedList.vue'
 </script>
 
 <template>
-  <header class="editor-header">
+  <header class="header">
+    <EditorHeaderStyleSelect />
+    <div class="divider"></div>
     <EditorHeaderButton :icon="IconBold" />
     <EditorHeaderButton :icon="IconItalic" />
     <EditorHeaderButton :icon="IconBlockquote" />
@@ -25,8 +28,8 @@ import IconUnorderedList from './icons/IconUnorderedList.vue'
   </header>
 </template>
 
-<style lang="css">
-.editor-header {
+<style lang="css" scoped>
+.header {
   align-items: center;
   background-color: var(--octonary-contrast);
   border-bottom: 1px solid var(--senary-contrast);
