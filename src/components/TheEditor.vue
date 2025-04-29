@@ -4,12 +4,13 @@ import { languages } from '@codemirror/language-data'
 import { Compartment, EditorState } from '@codemirror/state'
 import { basicSetup, EditorView } from 'codemirror'
 import { onMounted, ref, watch } from 'vue'
-import EditorHeader from './EditorHeader.vue'
-import { useMarkdownStore } from '@/stores/markdown'
+import { useMarkdownStore } from '@/stores/project'
+import { useEditorThemeStore } from '@/stores/editorTheme'
 
 const editor = ref()
 const markdownStore = useMarkdownStore()
-const editorTheme = new Compartment()
+const theme = new Compartment()
+const editorTheme = useEditorThemeStore()
 
 let view = new EditorView()
 
@@ -25,11 +26,11 @@ onMounted(() => {
             markdownStore.markdown = update.state.doc.toString()
           }
         }),
-        editorTheme.of([
-          themeStore.editor,
+        theme.of([
+          editorTheme.theme,
           EditorView.theme({
             '.cm-content': {
-              paddingBottom: 'calc(100vh - 8.4rem)',
+              paddingBottom: 'calc(100vh - 6.4rem)',
             },
           }),
         ]),
@@ -40,13 +41,13 @@ onMounted(() => {
   })
 })
 
-watch(themeStore, () => {
+watch(editorTheme, () => {
   view.dispatch({
-    effects: editorTheme.reconfigure([
-      themeStore.editor,
+    effects: theme.reconfigure([
+      editorTheme.theme,
       EditorView.theme({
         '.cm-content': {
-          paddingBottom: 'calc(100vh - 8.4rem)',
+          paddingBottom: 'calc(100vh - 6.4rem)',
         },
       }),
     ]),
@@ -56,7 +57,6 @@ watch(themeStore, () => {
 
 <template>
   <div class="editor-container">
-    <EditorHeader />
     <div class="editor-wrapper">
       <div ref="editor"></div>
     </div>
@@ -65,11 +65,11 @@ watch(themeStore, () => {
 
 <style lang="css" scoped>
 .editor-container {
-  height: calc(100vh - 4rem);
+  height: 100%;
 }
 
 .editor-wrapper {
-  height: calc(100vh - 7rem);
+  height: 100%;
   overflow-y: scroll;
 }
 </style>

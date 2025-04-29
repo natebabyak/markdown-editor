@@ -1,81 +1,72 @@
 <script setup lang="ts">
-import IconClose from './icons/IconClose.vue'
-import IconGithub from './icons/IconGithub.vue'
+import { useMenuStore } from '@/stores/menu'
+import ThemeSelect from './ThemeSelect.vue'
+import { usePreviewThemeStore } from '@/stores/previewTheme'
+import { useEditorThemeStore } from '@/stores/editorTheme'
+import { useAppThemeStore } from '@/stores/appTheme'
 import IconSpellcheck from './icons/IconSpellcheck.vue'
 import IconWordCount from './icons/IconWordCount.vue'
-import { onClickOutside } from '@vueuse/core'
-import { useMenuStore } from '@/stores/menu'
-import { useTemplateRef } from 'vue'
-import { useThemeStore } from '@/stores/theme'
-import MenuLink from './MenuLink.vue'
-import MenuButton from './MenuButton.vue'
-import BaseIconButton from './BaseIconButton.vue'
 
-const menuStore = useMenuStore()
-const target = useTemplateRef<HTMLElement>('target')
-const themeStore = useThemeStore()
-
-onClickOutside(target, () => menuStore.close())
+const menu = useMenuStore()
 </script>
 
 <template>
-  <div :class="[menuStore.isOpen ? 'open' : 'closed']" class="menu" ref="target">
-    <div class="button-container">
-      <BaseIconButton @click="menuStore.close" :icon="IconClose" />
+  <span v-if="menu.isOpen" @click="menu.close()" class="overlay"></span>
+  <div :class="['menu', { open: menu.isOpen }]">
+    <h1>Tools</h1>
+    <hr />
+    <span>Spellcheck</span>
+    <IconSpellcheck />
+    <span>Word Count</span>
+    <IconWordCount />
+    <h1>Settings</h1>
+    <hr />
+    <div class="item">
+      <span>App Theme</span>
+      <ThemeSelect :theme-store="useAppThemeStore()" />
     </div>
-    <h2>Tools</h2>
     <hr />
-    <MenuButton :icon="IconSpellcheck" :text="'Spellcheck'" />
-    <MenuButton :icon="IconWordCount" :text="'Word Count'" />
-    <h2>Theme</h2>
+    <div class="item">
+      <span>Editor Theme</span>
+      <ThemeSelect :theme-store="useEditorThemeStore()" />
+    </div>
     <hr />
-    <MenuButton
-      v-for="(theme, index) in themeStore.themes"
-      :key="index"
-      @click="themeStore.set(theme.key)"
-      :icon="theme.icon"
-      :is-active="theme.key === themeStore.app"
-      :is-default="theme.key === 'system'"
-      :text="theme.name"
-    >
-    </MenuButton>
-    <h2>Links</h2>
-    <hr />
-    <MenuLink
-      :icon="IconGithub"
-      :text="'GitHub'"
-      :url="'https://github.com/natebabyak/markdown-editor'"
-    />
+    <div class="item">
+      <span>Preview Theme</span>
+      <ThemeSelect :theme-store="usePreviewThemeStore()" />
+    </div>
   </div>
 </template>
 
 <style lang="css" scoped>
+.overlay {
+  position: fixed;
+  opacity: 0.25;
+  background-color: var(--color-black);
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
 .menu {
-  background-color: var(--octonary-contrast);
-  border-left: 1px solid var(--senary-contrast);
+  background-color: var(--background);
+  border-left: 1px solid var(--border);
   height: 100vh;
   padding: 1rem;
   position: fixed;
-  right: 0;
+  right: -24rem;
   top: 0;
   transition: transform 0.5s ease;
   width: 24rem;
 }
 
 .menu.open {
-  transform: translateX(0);
+  transform: translateX(-24rem);
 }
 
-.menu.closed {
-  transform: translateX(24rem);
-}
-
-.button-container {
+.item {
+  align-items: center;
   display: flex;
-  justify-content: right;
-}
-
-hr {
-  border-color: var(--senary-contrast);
+  justify-content: space-between;
 }
 </style>

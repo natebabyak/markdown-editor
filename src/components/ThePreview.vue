@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useMarkdownStore } from '@/stores/markdown'
+import { useMarkdownStore } from '@/stores/project'
 import DOMPurify from 'dompurify'
 import markdownit from 'markdown-it'
 import { computed } from 'vue'
@@ -21,7 +21,7 @@ const html = computed(() => DOMPurify.sanitize(md.render(markdownStore.markdown)
   </div>
 </template>
 
-<style lang="css" scoped>
+<style lang="css">
 .container {
   height: 100%;
   overflow-y: scroll;

@@ -1,7 +1,5 @@
 import { defineStore } from 'pinia'
-import type { Extension } from '@codemirror/state'
 import { computed, ref } from 'vue'
-import { useAppThemeStore } from './appTheme'
 
 /* thememirror */
 import {
@@ -38,93 +36,101 @@ import { tokyoNightStorm } from '@ddietr/codemirror-themes/tokyo-night-storm'
 import { oneDark } from '@codemirror/theme-one-dark'
 
 export const useEditorThemeStore = defineStore('editorTheme', () => {
-  /** A theme of an editor. */
-  type EditorTheme =
-    | 'amy'
-    | 'aura'
-    | 'ayuLight'
-    | 'barf'
-    | 'bespin'
-    | 'birdsOfParadise'
-    | 'boysAndGirls'
-    | 'clouds'
-    | 'cobalt'
-    | 'coolGlow'
-    | 'dracula'
-    | 'espresso'
-    | 'githubDark'
-    | 'githubLight'
-    | 'materialDark'
-    | 'materialLight'
-    | 'noctisLilac'
-    | 'oneDark'
-    | 'rosePineDawn'
-    | 'smoothy'
-    | 'solarizedDark'
-    | 'solarizedLight'
-    | 'tokyoNightDay'
-    | 'tokyoNightStorm'
-    | 'tokyoNight'
-    | 'tomorrow'
-
-  /** The themes of the editor. */
   const themes = [
-    { key: 'amy', name: 'Amy', theme: amy },
-    { key: 'aura', name: 'Aura', theme: aura },
-    { key: 'ayuLight', name: 'Ayu Light', theme: ayuLight },
-    { key: 'barf', name: 'Barf', theme: barf },
-    { key: 'bespin', name: 'Bespin', theme: bespin },
-    { key: 'birdsOfParadise', name: 'Birds of Paradise', theme: birdsOfParadise },
-    { key: 'boysAndGirls', name: 'Boys and Girls', theme: boysAndGirls },
-    { key: 'clouds', name: 'Clouds', theme: clouds },
-    { key: 'cobalt', name: 'Cobalt', theme: cobalt },
-    { key: 'coolGlow', name: 'Cool Glow', theme: coolGlow },
-    { key: 'dracula', name: 'Dracula', theme: dracula },
-    { key: 'espresso', name: 'Espresso', theme: espresso },
-    { key: 'githubDark', name: 'GitHub Dark', theme: githubDark },
-    { key: 'githubLight', name: 'GitHub Light', theme: githubLight },
-    { key: 'materialDark', name: 'Material Dark', theme: materialDark },
-    { key: 'materialLight', name: 'Material Light', theme: materialLight },
-    { key: 'noctisLilac', name: 'Noctis Lilac', theme: noctisLilac },
-    { key: 'oneDark', name: 'One Dark', theme: oneDark },
-    { key: 'rosePineDawn', name: 'Rose Pine Dawn', theme: rosePineDawn },
-    { key: 'smoothy', name: 'Smoothy', theme: smoothy },
-    { key: 'solarizedDark', name: 'Solarized Dark', theme: solarizedDark },
-    { key: 'solarizedLight', name: 'Solarized Light', theme: solarizedLight },
-    { key: 'tokyoNightDay', name: 'Tokyo Night Day', theme: tokyoNightDay },
-    { key: 'tokyoNightStorm', name: 'Tokyo Night Storm', theme: tokyoNightStorm },
-    { key: 'tokyoNight', name: 'Tokyo Night', theme: tokyoNight },
-    { key: 'tomorrow', name: 'Tomorrow', theme: tomorrow },
-  ] satisfies { key: EditorTheme; name: string; theme: Extension }[]
+    'amy',
+    'aura',
+    'ayuLight',
+    'barf',
+    'bespin',
+    'birdsOfParadise',
+    'boysAndGirls',
+    'clouds',
+    'cobalt',
+    'coolGlow',
+    'dracula',
+    'espresso',
+    'githubDark',
+    'githubLight',
+    'materialDark',
+    'materialLight',
+    'noctisLilac',
+    'oneDark',
+    'rosePineDawn',
+    'smoothy',
+    'solarizedDark',
+    'solarizedLight',
+    'tokyoNightDay',
+    'tokyoNightStorm',
+    'tokyoNight',
+    'tomorrow',
+  ] as const
 
-  /** The preview theme of the editor. */
-  const previewTheme = ref<EditorTheme | null>(null)
+  type EditorTheme = (typeof themes)[number]
 
-  /** The theme of the editor. */
-  const editorTheme = ref<EditorTheme>(
-    (localStorage.getItem('editorTheme') ??
-      (useAppThemeStore().isDark ? 'githubDark' : 'githubLight')) as EditorTheme,
-  )
-
-  /** Gets the theme of the editor. */
-  const theme = computed(() => (previewTheme.value ? previewTheme.value : editorTheme.value))
-
-  /**
-   * Previews the theme of the editor.
-   * @param newTheme The theme to preview.
-   */
-  function preview(newTheme: EditorTheme) {
-    previewTheme.value = newTheme
+  const editorThemesMap = {
+    amy: amy,
+    aura: aura,
+    ayuLight: ayuLight,
+    barf: barf,
+    bespin: bespin,
+    birdsOfParadise: birdsOfParadise,
+    boysAndGirls: boysAndGirls,
+    clouds: clouds,
+    cobalt: cobalt,
+    coolGlow: coolGlow,
+    dracula: dracula,
+    espresso: espresso,
+    githubDark: githubDark,
+    githubLight: githubLight,
+    materialDark: materialDark,
+    materialLight: materialLight,
+    noctisLilac: noctisLilac,
+    oneDark: oneDark,
+    rosePineDawn: rosePineDawn,
+    smoothy: smoothy,
+    solarizedDark: solarizedDark,
+    solarizedLight: solarizedLight,
+    tokyoNightDay: tokyoNightDay,
+    tokyoNightStorm: tokyoNightStorm,
+    tokyoNight: tokyoNight,
+    tomorrow: tomorrow,
   }
 
-  /**
-   * Sets the theme of the editor.
-   * @param newTheme The theme to set the editor to.
-   */
+  const editorTheme = ref<EditorTheme>(
+    (localStorage.getItem('editorTheme') ??
+      (window.matchMedia('(prefers-color-scheme: dark)').matches
+        ? 'githubDark'
+        : 'githubLight')) as EditorTheme,
+  )
+
+  const editorPreviewTheme = ref<EditorTheme | null>(null)
+
+  const theme = computed(() => {
+    return editorThemesMap[editorPreviewTheme.value ?? editorTheme.value]
+  })
+
+  function isActive(theme: EditorTheme) {
+    return editorTheme.value === theme
+  }
+
+  function name(theme: EditorTheme = editorTheme.value) {
+    return theme.replace(/([A-Z])/g, ' $1').replace(/^./, (char) => char.toUpperCase())
+  }
+
+  function preview(theme: EditorTheme) {
+    editorPreviewTheme.value = theme
+  }
+
+  function unpreview() {
+    editorPreviewTheme.value = null
+  }
+
   function set(newTheme: EditorTheme) {
     editorTheme.value = newTheme
     localStorage.setItem('editorTheme', newTheme)
   }
 
-  return { themes, theme, preview, set }
+  set(editorTheme.value)
+
+  return { themes, theme, isActive, name, preview, unpreview, set }
 })

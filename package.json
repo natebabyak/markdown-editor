@@ -19,7 +19,6 @@
     "@codemirror/language-data": "github:codemirror/language-data",
     "@codemirror/theme-one-dark": "^6.1.2",
     "@ddietr/codemirror-themes": "^1.5.1",
-    "@types/uuid": "^10.0.0",
     "@vueuse/core": "^13.0.0",
     "codemirror": "^6.0.1",
     "dompurify": "^3.2.5",
@@ -28,9 +27,7 @@
     "pinia": "^3.0.1",
     "split.js": "^1.6.5",
     "thememirror": "^2.0.1",
-    "uuid": "^11.1.0",
-    "vue": "^3.5.13",
-    "vue-router": "^4.5.0"
+    "vue": "^3.5.13"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.1",

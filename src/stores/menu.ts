@@ -3,25 +3,20 @@ import { defineStore } from 'pinia'
 
 export const useMenuStore = defineStore('menu', () => {
   /** Whether the menu is open. */
-  const menuOpen = ref(false)
+  const isMenuOpen = ref(false)
 
   /** Gets whether the menu is open. */
-  const isOpen = computed(() => menuOpen.value)
-
-  /** Opens the menu. */
-  function open() {
-    menuOpen.value = true
-  }
+  const isOpen = computed(() => isMenuOpen.value)
 
   /** Closes the menu. */
   function close() {
-    menuOpen.value = false
+    isMenuOpen.value = false
   }
 
-  /** Toggles whether the menu is open. */
+  /** Toggles the menu. */
   function toggle() {
-    menuOpen.value = !menuOpen.value
+    isMenuOpen.value = !isOpen.value
   }
 
-  return { isOpen, open, close, toggle }
+  return { isOpen, close, toggle }
 })

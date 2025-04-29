@@ -1,54 +1,50 @@
-import { computed, ref, type Component } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
-import IconDarkTheme from '@/components/icons/IconDarkTheme.vue'
-import IconLightTheme from '@/components/icons/IconLightTheme.vue'
-import IconSystemTheme from '@/components/icons/IconSystemTheme.vue'
 
 export const useAppThemeStore = defineStore('appTheme', () => {
-  /** A theme of an app. */
-  type AppTheme = 'dark' | 'light' | 'system'
+  const themes = ['dark', 'light', 'system'] as const
 
-  /** The themes of the app. */
-  const themes = [
-    { key: 'dark', icon: IconDarkTheme, name: 'Dark' },
-    { key: 'light', icon: IconLightTheme, name: 'Light' },
-    { key: 'system', icon: IconSystemTheme, name: 'System' },
-  ] satisfies { key: AppTheme; icon: Component; name: string }[]
+  type AppTheme = (typeof themes)[number]
 
-  /** The theme of the app. */
   const appTheme = ref<AppTheme>((localStorage.getItem('appTheme') ?? 'system') as AppTheme)
 
-  /** Gets the theme of the app. */
-  const theme = computed(() => appTheme.value)
-
-  /** Gets whether the theme of the app is dark. */
-  const isDark = computed(
-    () =>
-      appTheme.value === 'dark' ||
-      (appTheme.value === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches),
-  )
-
-  /**
-   * Sets the theme of the app.
-   * @param newTheme The theme to set the app to.
-   */
-  function set(newTheme: AppTheme) {
-    appTheme.value = newTheme
-    localStorage.setItem('appTheme', newTheme)
-
+  function apply(theme: AppTheme) {
     const media = window.matchMedia('(prefers-color-scheme: dark)')
-    const html = document.documentElement
+    const classList = document.documentElement.classList
 
-    html.classList.toggle('dark', isDark.value)
+    const isDark = theme === 'dark' || (theme === 'system' && media.matches)
+    classList.toggle('dark', isDark)
 
-    if (newTheme === 'system') {
+    if (theme === 'system') {
       media.onchange = () => {
-        if (appTheme.value === 'system') {
-          html.classList.toggle('dark', media.matches)
-        }
+        classList.toggle('dark', media.matches)
       }
     }
   }
 
-  return { themes, theme, isDark, set }
+  function isActive(theme: AppTheme) {
+    return appTheme.value === theme
+  }
+
+  function name(theme: AppTheme = appTheme.value) {
+    return theme.replace(/^./, (char) => char.toUpperCase())
+  }
+
+  function preview(theme: AppTheme) {
+    apply(theme)
+  }
+
+  function unpreview() {
+    apply(appTheme.value)
+  }
+
+  function set(theme: AppTheme) {
+    appTheme.value = theme
+    localStorage.setItem('appTheme', theme)
+    apply(theme)
+  }
+
+  set(appTheme.value)
+
+  return { themes, isActive, name, preview, unpreview, set }
 })
