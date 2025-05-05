@@ -2,19 +2,23 @@
 import { computed, ref } from 'vue'
 import IconLeftPanelClose from './icons/IconCloseSidebar.vue'
 import IconLeftPanelOpen from './icons/IconOpenSidebar.vue'
-import { useMarkdownStore } from '@/stores/project'
-import LargeIconButton from './LargeIconButton.vue'
+import { useProjectStore } from '@/stores/project'
+import HeaderIconButton from './HeaderIconButton.vue'
 
 const isOpen = ref(false)
-const markdown = useMarkdownStore()
-const outline = computed(() => markdown.outline)
+const project = useProjectStore()
+const outline = computed(() => project.outline)
 
 const toggle = () => (isOpen.value = !isOpen.value)
 </script>
 
 <template>
   <aside :class="['sidebar', { open: isOpen }]">
-    <LargeIconButton @click="toggle" :icon="isOpen ? IconLeftPanelClose : IconLeftPanelOpen" />
+    <HeaderIconButton
+      v-tooltip.right="(isOpen ? 'Close' : 'Open') + ' sidebar'"
+      @click="toggle"
+      :icon="isOpen ? IconLeftPanelClose : IconLeftPanelOpen"
+    />
     <div v-if="isOpen" class="outline">
       <h1>Outline</h1>
       <hr />
@@ -28,7 +32,7 @@ const toggle = () => (isOpen.value = !isOpen.value)
 
 <style lang="css" scoped>
 .sidebar {
-  background-color: var(--background);
+  background-color: var(--background-soft);
   border-right: 1px solid var(--border);
   padding: 0.5rem;
   width: 3rem;

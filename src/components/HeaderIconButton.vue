@@ -8,20 +8,14 @@ defineProps(['icon'])
 
 <style lang="css" scoped>
 .button {
-  border-radius: 25%;
   color: var(--text-mute);
   cursor: pointer;
-  height: 1.5rem;
-  width: 1.5rem;
+  height: 2rem;
+  transition: color 0.3s ease;
+  width: 2rem;
 }
 
 .button:hover {
-  background-color: var(--background-light);
   color: var(--text-soft);
-}
-
-.svg {
-  height: 1.5rem;
-  width: 1.5rem;
 }
 </style>

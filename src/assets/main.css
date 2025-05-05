@@ -1,1 +1,22 @@
 @import './base.css';
+
+.icon-button {
+  color: var(--text-mute);
+  cursor: pointer;
+  height: 1.5rem;
+  transition: color 0.3s ease;
+}
+
+.icon-button:hover {
+  color: var(--text-soft);
+}
+
+.v-popper__inner {
+  background-color: var(--background) !important;
+  border: 1px solid var(--border) !important;
+  color: var(--text) !important;
+}
+
+.v-popper__arrow-outer {
+  visibility: hidden !important;
+}

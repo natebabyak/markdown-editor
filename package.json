@@ -22,6 +22,7 @@
     "@vueuse/core": "^13.0.0",
     "codemirror": "^6.0.1",
     "dompurify": "^3.2.5",
+    "floating-vue": "^5.2.2",
     "github-markdown-css": "^5.8.1",
     "markdown-it": "^14.1.0",
     "pinia": "^3.0.1",

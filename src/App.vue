@@ -12,7 +12,7 @@ onMounted(() => {
   Split(['#editor', '#preview'], {
     snapOffset: 0,
     cursor: 'ew-resize',
-    gutterSize: 1,
+    gutterSize: 3,
   })
 })
 </script>
@@ -66,7 +66,7 @@ onMounted(() => {
   transition:
     background-color 0.3s ease-in,
     width 0.1s ease-in;
-  width: 1px;
+  width: 3px;
 }
 
 .gutter:hover {

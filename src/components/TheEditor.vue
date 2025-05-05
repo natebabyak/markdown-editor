@@ -4,11 +4,11 @@ import { languages } from '@codemirror/language-data'
 import { Compartment, EditorState } from '@codemirror/state'
 import { basicSetup, EditorView } from 'codemirror'
 import { onMounted, ref, watch } from 'vue'
-import { useMarkdownStore } from '@/stores/project'
+import { useProjectStore } from '@/stores/project'
 import { useEditorThemeStore } from '@/stores/editorTheme'
 
 const editor = ref()
-const markdownStore = useMarkdownStore()
+const project = useProjectStore()
 const theme = new Compartment()
 const editorTheme = useEditorThemeStore()
 
@@ -23,7 +23,7 @@ onMounted(() => {
         markdown({ codeLanguages: languages }),
         EditorView.updateListener.of((update) => {
           if (update.docChanged) {
-            markdownStore.markdown = update.state.doc.toString()
+            project.set(update.state.doc.toString())
           }
         }),
         theme.of([
@@ -35,7 +35,7 @@ onMounted(() => {
           }),
         ]),
       ],
-      doc: markdownStore.markdown,
+      doc: project.markdown,
     }),
     parent: editor.value,
   })
@@ -56,19 +56,11 @@ watch(editorTheme, () => {
 </script>
 
 <template>
-  <div class="editor-container">
-    <div class="editor-wrapper">
-      <div ref="editor"></div>
-    </div>
-  </div>
+  <div class="editor" ref="editor"></div>
 </template>
 
 <style lang="css" scoped>
-.editor-container {
-  height: 100%;
-}
-
-.editor-wrapper {
+.editor {
   height: 100%;
   overflow-y: scroll;
 }

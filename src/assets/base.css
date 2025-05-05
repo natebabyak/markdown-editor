@@ -28,46 +28,37 @@
 }
 
 :root {
-  --background: var(--color-white);
+  --background: var(--color-neutral-50);
   --background-soft: var(--color-neutral-100);
   --background-mute: var(--color-neutral-200);
 
   --border: var(--color-neutral-300);
 
-  --text: var(--color-black);
-  --text-soft: var(--color-neutral-800);
-  --text-mute: var(--color-neutral-600);
+  --text: var(--color-neutral-900);
+  --text-soft: var(--color-neutral-700);
+  --text-mute: var(--color-neutral-500);
 
   --brand: var(--color-sky-500);
+  --brand-soft: var(--color-sky-400);
+  --brand-mute: var(--color-sky-300);
 }
 
 .dark {
-  --background: var(--color-neutral-900);
-  --background-dark: var(--color-neutral-950);
-  --background-light: var(--color-neutral-800);
+  --background: var(--color-neutral-950);
+  --background-soft: var(--color-neutral-900);
+  --background-mute: var(--color-neutral-800);
 
   --border: var(--color-neutral-700);
 
-  --text: var(--color-neutral-50);
+  --text: var(--color-neutral-100);
   --text-soft: var(--color-neutral-300);
   --text-mute: var(--color-neutral-500);
-}
 
-::-webkit-scrollbar {
-  width: 17px;
-  height: 17px;
-}
+  --brand: var(--color-sky-500);
+  --brand-soft: var(--color-sky-600);
+  --brand-mute: var(--color-sky-700);
 
-::-webkit-scrollbar-track {
-  background-color: var(--background);
-}
-
-::-webkit-scrollbar-thumb {
-  background-color: var(--text-mute);
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background-color: var(--text-soft);
+  scrollbar-color: var(--border) var(--background-soft);
 }
 
 *,

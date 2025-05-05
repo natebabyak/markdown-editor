@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import LargeIconButton from './LargeIconButton.vue'
+import HeaderIconButton from './HeaderIconButton.vue'
 import IconMenu from './icons/IconMenu.vue'
 import { useMenuStore } from '@/stores/menu'
 
@@ -9,7 +9,7 @@ const menu = useMenuStore()
 <template>
   <header class="header">
     <img class="logo" src="../assets/logo.svg" alt="logo" />
-    <LargeIconButton @click="menu.toggle()" :icon="IconMenu" />
+    <HeaderIconButton v-tooltip.left="'Open menu'" @click="menu.toggle()" :icon="IconMenu" />
   </header>
 </template>
 
@@ -21,8 +21,8 @@ const menu = useMenuStore()
   display: flex;
   height: 3rem;
   justify-content: space-between;
-  padding: 0 1rem 0 1rem;
-  width: 100%;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
 }
 
 .logo {
