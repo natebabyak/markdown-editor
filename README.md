@@ -127,6 +127,6 @@ Instantly switch between over 30 themes and preview them live.
 
 ## License
 
-This project is licensed under the MIT License. See the [LICENSE.txt](https://github.com/natebabyak/markdown-editor/blob/master/LICENSE.txt) file for details.
+This project is licensed under the MIT License. See the [LICENSE](https://github.com/natebabyak/markdown-editor/blob/main/LICENSE) file for details.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
