@@ -32,11 +32,37 @@ const labels = [
 
 <template>
   <div class="option">
-    <span class="icon">
-      {{ icons[index] }}
-    </span>
+    <component :is="icons[index]" class="icon" />
     <span class="label">{{ labels[index] }}</span>
   </div>
 </template>
 
-<style lang="css" scoped></style>
+<style lang="css" scoped>
+.option {
+  align-items: center;
+  background-color: var(--background-soft);
+  color: var(--text-mute);
+  border-radius: 9999px;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  height: 1.5rem;
+  padding-left: 0.25rem;
+  padding-right: 0.5rem;
+  transition:
+    background-color 0.3s ease,
+    color 0.3s ease;
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  width: 8rem;
+}
+
+.option:hover {
+  background-color: var(--background-mute);
+  color: var(--text-soft);
+}
+
+.label {
+  font-weight: 600;
+}
+</style>

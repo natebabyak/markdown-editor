@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia'
 import { computed, ref } from 'vue'
+import { defineStore } from 'pinia'
 
 /* thememirror */
 import {
@@ -36,7 +36,7 @@ import { tokyoNightStorm } from '@ddietr/codemirror-themes/tokyo-night-storm'
 import { oneDark } from '@codemirror/theme-one-dark'
 
 export const useEditorThemeStore = defineStore('editorTheme', () => {
-  /** The themes of the editor. */
+  /** The list of themes of the editor. */
   const themes = [
     'amy',
     'aura',
@@ -69,7 +69,7 @@ export const useEditorThemeStore = defineStore('editorTheme', () => {
   /** A theme of the editor. */
   type EditorTheme = (typeof themes)[number]
 
-  /** The themes of the editor. */
+  /** The map of themes of the editor. */
   const editorThemesMap = {
     amy: amy,
     aura: aura,
@@ -107,7 +107,7 @@ export const useEditorThemeStore = defineStore('editorTheme', () => {
         : 'githubLight')) as EditorTheme,
   )
 
-  /** The preview theme of the editor. */
+  /** The current preview theme of the editor. */
   const editorPreviewTheme = ref<EditorTheme | null>(null)
 
   /** Gets the current theme of the editor */

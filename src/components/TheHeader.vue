@@ -15,6 +15,7 @@ const menu = useMenuStore()
 
 <style lang="css" scoped>
 .header {
+  user-select: none;
   align-items: center;
   background-color: var(--background);
   border-bottom: 1px solid var(--border);

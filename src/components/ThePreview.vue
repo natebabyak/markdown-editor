@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { useProjectStore } from '@/stores/project'
+import { useEditorStore } from '@/stores/editor'
 import DOMPurify from 'dompurify'
 import markdownit from 'markdown-it'
 import { computed } from 'vue'
 
-const project = useProjectStore()
+const editor = useEditorStore()
 
 const md = markdownit({
   html: true,
@@ -12,7 +12,7 @@ const md = markdownit({
   typographer: true,
 })
 
-const html = computed(() => DOMPurify.sanitize(md.render(project.markdown)))
+const html = computed(() => DOMPurify.sanitize(md.render(editor.getContent)))
 </script>
 
 <template>
@@ -28,6 +28,8 @@ const html = computed(() => DOMPurify.sanitize(md.render(project.markdown)))
 }
 
 .preview {
+  min-height: calc(100vh - 5rem);
   padding: 2rem;
+  border-right: 1px solid var(--border);
 }
 </style>

@@ -14,7 +14,7 @@ const menu = useMenuStore()
   <span v-if="menu.isOpen" @click="menu.close()" class="overlay"></span>
   <div :class="['menu', { open: menu.isOpen }]">
     <div class="top">
-      <HeaderIconButton @click="menu.close()" :icon="IconClose" />
+      <HeaderIconButton v-tooltip.left="'Close menu'" @click="menu.close()" :icon="IconClose" />
     </div>
     <h1>Settings</h1>
     <hr />
@@ -38,11 +38,20 @@ const menu = useMenuStore()
 <style lang="css" scoped>
 .overlay {
   position: fixed;
-  opacity: 0.25;
+  opacity: 0.5;
   background-color: var(--background);
   inset: 0;
   width: 100vw;
   height: 100vh;
+}
+
+hr {
+  border-color: var(--border);
+}
+
+h1 {
+  font-weight: 600;
+  font-size: 1.5rem;
 }
 
 .menu {
@@ -55,6 +64,7 @@ const menu = useMenuStore()
   top: 0;
   transition: transform 0.5s ease;
   width: 24rem;
+  user-select: none;
 }
 
 .menu.open {
@@ -70,5 +80,12 @@ const menu = useMenuStore()
   align-items: center;
   display: flex;
   justify-content: space-between;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.item span {
+  font-weight: 600;
+  color: var(--text-soft);
 }
 </style>

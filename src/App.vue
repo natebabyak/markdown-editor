@@ -13,6 +13,7 @@ onMounted(() => {
     snapOffset: 0,
     cursor: 'ew-resize',
     gutterSize: 3,
+    minSize: 200,
   })
 })
 </script>
@@ -63,9 +64,7 @@ onMounted(() => {
   position: absolute;
   top: 0;
   transform: translateX(-50%);
-  transition:
-    background-color 0.3s ease-in,
-    width 0.1s ease-in;
+  transition: background-color 0.3s ease-in;
   width: 3px;
 }
 
