@@ -35,18 +35,16 @@ export const useEditorStore = defineStore('editor', () => {
       }
     }
 
-    const levelMap = new Map<number, number>()
-    let nextLevel = 0
+    const uniqueLevels = [...new Set(headings.map((h) => h.level))].sort((a, b) => a - b)
+    const levelMap = new Map()
 
-    headings.forEach((heading) => {
-      if (!levelMap.has(heading.level)) {
-        levelMap.set(heading.level, nextLevel++)
-      }
+    uniqueLevels.forEach((level, index) => {
+      levelMap.set(level, index)
     })
 
     return headings.map((heading) => ({
       ...heading,
-      level: levelMap.get(heading.level) ?? heading.level,
+      level: levelMap.get(heading.level),
     }))
   })
 
