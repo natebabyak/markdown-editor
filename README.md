@@ -9,6 +9,11 @@
   <p>A markdown editor built with Vue.js</p>
 </div>
 
+> ## 🚧 Deprecation Notice
+> **As of June 24, 2025, this project has been superseded by [markte](https://github.com/natebabyak/markte).**
+> 
+> This repository will remain public for reference but is no longer maintained and will not receive updates.
+
 <!-- TABLE OF CONTENTS -->
 <ol>
   <li><a href="#about">About</a></li>
